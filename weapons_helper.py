@@ -21,18 +21,19 @@ def _display_detected_frames(model, st_frame, image):
     image = cv2.resize(image, (720, int(720 * (9 / 16))))
 
     result = model(image, return_vis=True)
-    print("result", result)
+    # print("result", result)
     try:
         visualized_image_array = result['visualization'][0]
     except Exception as e:
         visualized_image_array = np.array(image)
 
-    visualized_image = PIL.Image.fromarray(visualized_image_array)
+    visualized_image =  PIL.Image.fromarray(cv2.cvtColor(visualized_image_array, cv2.COLOR_BGR2RGB))
+    
     with st_frame:
         st.text("Detected weapons")
         col1, col2 = st.columns(2)
-        col1.image(image, caption = "Original image")
-        col2.image(visualized_image, caption = "Detection results")
+        col1.image(image, caption = "Original image", channels="BGR", use_column_width=True)
+        col2.image(visualized_image, caption = "Detection results", channels="BGR", use_column_width=True)
     # st.image(cutout_images, clamp=True)
     # st_frame.image(visualized_image, caption='Detected Video', channels="BGR", use_column_width=True)
 
