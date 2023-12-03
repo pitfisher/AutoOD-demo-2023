@@ -1,0 +1,63 @@
+{    
+    "gestures_detection_model_path_v8": "weights/gestures_model.pt",
+    "gestures_model_conf_v8": 0.4,
+    "grinder_parts_detection_model_path_v8": "weights/grinder_parts_model.pt",
+    "grinder_parts_model_conf_v8": 0.1,
+    "stages_grinder_detection_model_path_v8": "stages_grinder_yolov8_s_1920/weights/best.pt",
+    "stages_grinder_model_conf_v8": 0.85,
+    "details_grinder_detection_model_path_v5": "details_grinder_yolov5_s_1920/weights/best.pt",
+    "details_grinder_model_conf_v5": 0.7,
+    "stages_grinder_detection_model_path_v5": "stages_grinder_yolov5_s_1920/weights/best.pt",
+    "stages_grinder_model_conf_v5": 0.9,
+    "palm_detection_model_path_v5": "weights/palms_model.pt",
+    "palm_model_conf_v5": 0.8,
+    "bicycle_parts_detection_model_path_v5": "weights/bicycle_parts_model.pt",
+    "bicycle_parts_detection_model_conf_v5": 0.5,
+    "yolo_v5_path": "yolov5_v7.0",
+    "video_source_main_camera": 1,
+    "video_source_second_camera": 2,
+    "to_russian_grinder_parts": {
+        "0": "Корпус",
+        "1": "Ручка",
+        "2": "Шнек",
+        "3": "Нож",
+        "4": "Решетка",
+        "5": "Гайка",
+        "6": "Болт"
+    },
+    "to_russian_stages_grinder": {
+        "0": "Соединение 0",
+        "1": "Соединение 1",
+        "2": "Соединение 2",
+        "3": "Соединение 3",
+        "4": "Соединение 4",
+        "5": "Соединение 5",
+        "6": "Соединение 6"
+    },
+    "to_russian_bicycle_parts": {
+        "0": "большой подшипник",
+        "1": "1",
+        "2": "маленький подшипник",
+        "3": "шестеренка",
+        "4": "стержень",
+        "5": "втулка",
+        "6": "6",
+        "7": "7",
+        "8": "8",
+        "9": "9",
+        "10": "10",
+        "11": "11",
+        "12": "12",
+        "13": "13",
+        "14": "14",
+        "15": "15",
+        "16": "16",
+        "17": "17",
+        "18": "18",
+        "19": "19",
+        "20": "20"
+    },
+    "to_russian_palm": {
+        "0": "Рука"
+    }
+}
