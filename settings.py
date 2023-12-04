@@ -21,10 +21,12 @@ DEFAULT_DETECT_IMAGE = IMAGES_DIR / 'output/vis/13.jpg'
 VIDEO_1_PATH = VIDEO_DIR / 'weapon1_1.mp4'
 VIDEO_2_PATH = VIDEO_DIR / 'weapon2_2.mp4'
 VIDEO_3_PATH = VIDEO_DIR / 'balabanov.webm'
+VIDEO_4_PATH = VIDEO_DIR / 'gestures_test.mkv'
 VIDEOS_DICT = {
     'weapon1_1': VIDEO_1_PATH,
     'weapon2_2': VIDEO_2_PATH,
     'balabanov': VIDEO_3_PATH,
+    'Жесты': VIDEO_4_PATH,
 }
 
 # WEAPONS_DETECTION_MODEL = ROOT / "weights/weapons_best2.pt"
@@ -35,3 +37,5 @@ WEAPONS_DETECTION_MODEL_CONFIG = ROOT / 'weights/rtmdet_l_8xb32-300e_coco_custom
 DRONE_BIG_MODEL = ROOT / "weights/drone_big_model.ckpt"
 # path to SSD MobileNetv3 model
 DRONE_SMALL_MODEL = ROOT / "weights/drone_small_model.ckpt"
+
+BICYCLE_PARTS_MODEL = ROOT / "weights/bicycle_parts_model.pt"
