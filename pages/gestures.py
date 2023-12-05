@@ -46,6 +46,7 @@ def gestures_demo():
         yolo_v8_class_obj.detect_objects(frame=original_image_np,
                                                 model=model,
                                                 current_model_conf=confidence,
+                                                image_size=720,
                                                 image_displayer=yolo_helper.ImageDisplayer(),
                                                 labels_translator=translator)
         st.text("Результаты распознавания")
@@ -66,6 +67,7 @@ def gestures_demo():
                         yolo_v8_class_obj.detect_objects(frame=image,
                                                                 model=model,
                                                                 current_model_conf=confidence,
+                                                                image_size=720,
                                                                 image_displayer=yolo_helper.ImageDisplayer(),
                                                                 labels_translator=translator)
                         with st_frame:
