@@ -29,19 +29,20 @@ def grinder_parts_demo():
     
     original_image = Image.open(image_file)
     original_image_np = np.asarray(original_image)
-    translator = config["to_russian_palm"]
+    translator = config["to_russian_grinder_parts"]
     confidence = config["grinder_parts_model_conf_v8"]
     weights = config["grinder_parts_detection_model_path_v8"]
     try:
         yolo_v8_class_obj = yolo_helper.YOLOv8Model()
         model = yolo_v8_class_obj.load_model(weights)
     except Exception as ex:
-        st.error(f"Unable to load model. Check the specified path: {settings.BICYCLE_PARTS_MODEL}")
+        st.error(f'Unable to load model. Check the specified path: {config["grinder_parts_detection_model_path_v8"]}')
         st.error(ex)
 
     yolo_v8_class_obj.detect_objects(frame=original_image_np,
                                             model=model,
                                             current_model_conf=confidence,
+                                            image_size=1920,
                                             image_displayer=yolo_helper.ImageDisplayer(),
                                             labels_translator=translator)
     st.text("Detection results")
