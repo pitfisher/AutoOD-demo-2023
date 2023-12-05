@@ -94,8 +94,8 @@ class YOLOv8Model(ObjectDetectionModel):
         current_model = YOLO(path_to_model_weights)
         return current_model
 
-    def detect_objects(self, frame, model, current_model_conf, image_displayer, labels_translator=None):
-        details_nn_results = model.predict(frame, imgsz=1920)
+    def detect_objects(self, frame, model, current_model_conf, image_size, image_displayer, labels_translator=None):
+        details_nn_results = model.predict(frame, imgsz=image_size)
         for item in details_nn_results:
             boxes = item.boxes.cpu().numpy()  # get boxes on cpu in numpy
             for obj in boxes.data:
