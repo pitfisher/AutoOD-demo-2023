@@ -4,7 +4,7 @@ import streamlit as st
 import settings
 import drone_helper
 import numpy as np
-import utils
+from utils import iterator_from_images_directory
 big_model, small_model = drone_helper.init_models(settings.DRONE_BIG_MODEL, settings.DRONE_SMALL_MODEL)
 
 images_directory_path = Path("media/images/drone")
@@ -35,7 +35,7 @@ def drone_demo():
         st.image(cutout_images, clamp=True)
     elif source_type == 'Папка':
         st_frame = st.empty()
-        for original_image in utils.iterator_from_images_directory(images_directory_path):
+        for original_image in iterator_from_images_directory(images_directory_path):
                 if not original_image:
                     return None
 
