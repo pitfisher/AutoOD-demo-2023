@@ -20,14 +20,14 @@ LOGGER = get_logger(__name__)
 
 def run():
     st.set_page_config(
-        page_title="Hello",
+        page_title="Главная страница",
         page_icon="??",
         layout="wide",
     )
 
-    st.write("# Welcome to Streamlit! ??")
+    st.write("Демонстрация библиотеки обученных моделей машинного зрения для распознавания объектов")
 
-    st.sidebar.success("Select a demo above.")
+    # st.sidebar.success("Select a demo above.")
 
     # st.markdown(
     #     """
