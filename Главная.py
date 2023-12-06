@@ -14,7 +14,7 @@
 
 import streamlit as st
 from streamlit.logger import get_logger
-
+import pandas as pd
 LOGGER = get_logger(__name__)
 
 
@@ -22,6 +22,7 @@ def run():
     st.set_page_config(
         page_title="Hello",
         page_icon="??",
+        layout="wide",
     )
 
     st.write("# Welcome to Streamlit! ??")
@@ -46,6 +47,8 @@ def run():
     """
     )
 
+    df = pd.read_csv('od_models.csv')
+    st.table(df)
 
 if __name__ == "__main__":
     run()
