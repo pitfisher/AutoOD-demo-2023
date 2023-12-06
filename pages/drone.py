@@ -4,7 +4,7 @@ import streamlit as st
 import settings
 import drone_helper
 import numpy as np
-from utils import iterator_from_images_directory
+from helper import iterator_from_images_directory
 big_model, small_model = drone_helper.init_models(settings.DRONE_BIG_MODEL, settings.DRONE_SMALL_MODEL)
 
 images_directory_path = Path("media/images/drone")
