@@ -5,7 +5,7 @@ import settings
 import drone_helper
 import numpy as np
 from helper import iterator_from_images_directory
-from time import perf_counter
+from time import perf_counter, sleep
 from statistics import mean
 
 big_model, small_model = drone_helper.init_models(settings.DRONE_BIG_MODEL, settings.DRONE_SMALL_MODEL)
@@ -16,8 +16,15 @@ images_directory_path = Path("media/images/drone_closed_val")
 inference_time_list = []
 
 def drone_demo():
-    st.set_page_config(layout="wide")
+    st.set_page_config(
+        page_title="Детекция людей с БПЛА",
+        page_icon="🤖",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
 
+    st.title("Детекция людей с БПЛА")
+    st.sidebar.header("Настройки")
     source_type = st.sidebar.radio(
     "Тип источника", ['Файл', 'Папка'])
 
@@ -40,7 +47,8 @@ def drone_demo():
         col2.image(processed_image, caption = "Результаты распознавания")
         st.image(cutout_images, clamp=True)
     elif source_type == 'Папка':
-        st_frame = st.empty()
+        st_frame1 = st.empty()
+        st_frame2 = st.empty()
         for original_image in iterator_from_images_directory(images_directory_path):
                 if not original_image:
                     return None
@@ -53,12 +61,14 @@ def drone_demo():
                 inference_time_list.append(inference_time)
                 cutout_images = drone_helper.preprocess_cutout_images(cutout_images)
                 processed_image = drone_helper.draw_bboxes(np.array(original_image), results, big_bboxes)
-                with st_frame:
+                with st_frame1:
                     st.text("Обнаруженные люди")
                     col1, col2 = st.columns(2)
                     col1.image(original_image, caption = "Исходное изображение")
                     col2.image(processed_image, caption = "Результаты распознавания")
-                    # st.image(cutout_images, clamp=True)
+                with st_frame2:
+                    st.image(cutout_images, clamp=True)
+
         print(f"Mean inference time: {mean(inference_time_list) * 1000:.0f}ms")
     else:
         st.error("Please select a valid source type!")

@@ -7,14 +7,14 @@ import yolo_helper
 
 def grinder_parts_demo():
     st.set_page_config(
-        page_title="Grinder parts detection",
+        page_title="Обнаружение частей мясорубки",
         page_icon="🤖",
         layout="wide",
         initial_sidebar_state="expanded"
     )
 
-    st.title("Grinder parts detection")
-    st.sidebar.header("ML Model Config")
+    st.title("Обнаружение частей мясорубки")
+    st.sidebar.header("Настройки")
 
     # confidence = float(st.sidebar.slider(
     #     "Select Model Confidence", 25, 100, 40)) / 100
@@ -45,10 +45,10 @@ def grinder_parts_demo():
                                             image_size=1920,
                                             image_displayer=yolo_helper.ImageDisplayer(),
                                             labels_translator=translator)
-    st.text("Detection results")
+    st.text("Результаты распознавания")
     col1, col2 = st.columns(2)
-    col1.image(original_image, caption = "Original image")
-    col2.image(original_image_np, caption = "Detection results")
+    col1.image(original_image, caption = "Исходное изображение")
+    col2.image(original_image_np, caption = "Результаты распознавания")
     # st.image(cutout_images, clamp=True)
 
 grinder_parts_demo()

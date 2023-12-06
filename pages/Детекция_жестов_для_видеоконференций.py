@@ -8,14 +8,14 @@ import cv2
 
 def gestures_demo():
     st.set_page_config(
-        page_title="Gestures recognition",
+        page_title="Распознавание жестов",
         page_icon="🤖",
         layout="wide",
         initial_sidebar_state="expanded"
     )
 
-    st.title("Gestures recognition")
-    st.sidebar.header("ML Model Config")
+    st.title("Распознавание жестов")
+    st.sidebar.header("Настройки")
 
     source_type = st.sidebar.radio(
     "Тип источника", ['Файл', 'Видео'])
@@ -24,7 +24,7 @@ def gestures_demo():
     config_loader = yolo_helper.ConfigLoader(path_to_json_config)
     config = config_loader.get_config()
 
-    translator = config["to_russian_bicycle_parts"]
+    translator = config["to_russian_gestures"]
     confidence = config["gestures_model_conf_v8"]
     weights = config["gestures_detection_model_path_v8"]
     try:

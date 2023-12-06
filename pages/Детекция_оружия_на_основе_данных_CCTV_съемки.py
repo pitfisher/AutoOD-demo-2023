@@ -6,14 +6,14 @@ import weapons_helper
 
 def weapon_demo():
     st.set_page_config(
-        page_title="Weapons detection",
+        page_title="Детекция оружия",
         page_icon="🤖",
         layout="wide",
         initial_sidebar_state="expanded"
     )
 
-    st.title("Weapons detection")
-    st.sidebar.header("ML Model Config")
+    st.title("Детекция оружия")
+    st.sidebar.header("Настройки")
 
     # confidence = float(st.sidebar.slider(
     #     "Select Model Confidence", 25, 100, 40)) / 100

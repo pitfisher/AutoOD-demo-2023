@@ -13,7 +13,7 @@ def proctoring_demo():
     )
 
     st.title("Proctoring")
-    st.sidebar.header("ML Model Config")
+    st.sidebar.header("Настройки")
 
     # confidence = float(st.sidebar.slider(
     #     "Select Model Confidence", 25, 100, 40)) / 100

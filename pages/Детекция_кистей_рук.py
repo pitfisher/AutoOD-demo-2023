@@ -7,14 +7,14 @@ import yolo_helper
 
 def palms_demo():
     st.set_page_config(
-        page_title="Palms detection",
+        page_title="Детекция кистей рук",
         page_icon="🤖",
         layout="wide",
         initial_sidebar_state="expanded"
     )
 
-    st.title("Palms detection")
-    st.sidebar.header("ML Model Config")
+    st.title("Детекция кистей рук")
+    st.sidebar.header("Настройки")
 
     path_to_json_config = 'yolo_config.json'
     config_loader = yolo_helper.ConfigLoader(path_to_json_config)
@@ -42,10 +42,10 @@ def palms_demo():
                                             current_model_conf=confidence,
                                             image_displayer=yolo_helper.ImageDisplayer(),
                                             labels_translator=translator)
-    st.text("Detection results")
+    st.text("Обнаруженные люди")
     col1, col2 = st.columns(2)
-    col1.image(original_image, caption = "Original image")
-    col2.image(original_image_np, caption = "Detection results")
+    col1.image(original_image, caption = "Исходное изображение")
+    col2.image(original_image_np, caption = "Результаты распознавания")
     # st.image(cutout_images, clamp=True)
 
 palms_demo()

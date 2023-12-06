@@ -8,14 +8,14 @@ import yolo_helper
 
 def bicycle_parts_demo():
     st.set_page_config(
-        page_title="Bicycle parts detection",
+        page_title="Обнаружение запчастей велосипедной втулки",
         page_icon="🤖",
         layout="wide",
         initial_sidebar_state="expanded"
     )
 
-    st.title("Bicycle parts detection")
-    st.sidebar.header("ML Model Config")
+    st.title("Обнаружение запчастей велосипедной втулки")
+    st.sidebar.header("Настройки")
 
     path_to_json_config = 'yolo_config.json'
     config_loader = yolo_helper.ConfigLoader(path_to_json_config)
@@ -43,10 +43,10 @@ def bicycle_parts_demo():
                                             current_model_conf=confidence,
                                             image_displayer=yolo_helper.ImageDisplayer(),
                                             labels_translator=translator)
-    st.text("Detection results")
+    st.text("Результаты распознавания")
     col1, col2 = st.columns(2)
-    col1.image(original_image, caption = "Original image")
-    col2.image(original_image_np, caption = "Detection results")
+    col1.image(original_image, caption = "Исходное изображение")
+    col2.image(original_image_np, caption = "Результаты распознавания")
     # st.image(cutout_images, clamp=True)
 
 
