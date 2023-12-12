@@ -13,6 +13,15 @@ ROOT = root_path.relative_to(Path.cwd())
 VIDEO_DIR = ROOT / "media/videos/"
 IMAGES_DIR = ROOT / 'media/images/'
 
+# Sources
+WEBCAM = 'Веб-камера'
+VIDEO = 'Видео'
+
+SOURCES_LIST = [WEBCAM, VIDEO]
+
+# Webcam
+WEBCAM_ID = 0
+
 # Images config
 DEFAULT_IMAGE = IMAGES_DIR / '13.jpg'
 DEFAULT_DETECT_IMAGE = IMAGES_DIR / 'output/vis/13.jpg'

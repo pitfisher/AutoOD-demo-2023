@@ -53,9 +53,31 @@ def play_stored_video(model):
             while vid_cap.isOpened():
                 success, image = vid_cap.read()
                 if success:
-                    _display_detected_frames(model, st_frame, image)
+                    _display_detected_frames(model,
+                                             st_frame,
+                                             image
+                                             )
                 else:
                     vid_cap.release()
                     break
         except Exception as e:
             st.sidebar.error("Ошибка загрузки видео: " + str(e))
+
+def play_webcam(model):
+    source_webcam = settings.WEBCAM_ID
+    if st.sidebar.button('Начать распознавание'):
+        try:
+            vid_cap = cv2.VideoCapture(source_webcam)
+            st_frame = st.empty()
+            while (vid_cap.isOpened()):
+                success, image = vid_cap.read()
+                if success:
+                    _display_detected_frames(model,
+                                             st_frame,
+                                             image,
+                                             )
+                else:
+                    vid_cap.release()
+                    break
+        except Exception as e:
+            st.sidebar.error("Error loading video: " + str(e))

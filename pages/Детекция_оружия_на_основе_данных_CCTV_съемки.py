@@ -27,8 +27,15 @@ def weapon_demo():
         st.error(f"Unable to load model. Check the specified path: {model_path}")
         st.error(ex)
 
+    st.sidebar.header("Настройки")
+    source_radio = st.sidebar.radio("Выберите источник: ", settings.SOURCES_LIST)
     # weapons_helper.play_stored_video(confidence, model)
-    weapons_helper.play_stored_video(model)
+    if source_radio == settings.WEBCAM:
+        weapons_helper.play_webcam(model)
+    elif source_radio == settings.VIDEO:
+        weapons_helper.play_stored_video(model)
+    else:
+        st.error("Please select a valid source type!")
 
 weapon_demo()
 
