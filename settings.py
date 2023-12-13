@@ -16,9 +16,12 @@ IMAGES_DIR = ROOT / 'media/images/'
 # Sources
 WEBCAM = 'Веб-камера'
 VIDEO = 'Видео'
-
-SOURCES_LIST = [WEBCAM, VIDEO]
-
+IMAGE = 'Изображение'
+IMAGES_DIRECTORY = 'Папка'
+SOURCES_LIST_WEAPONS = [WEBCAM, VIDEO]
+SOURCES_LIST_DRONE = [IMAGE, IMAGES_DIRECTORY]
+SOURCES_LIST_PALMS = [IMAGE, WEBCAM]
+SOURCES_LIST_GESTURES = [IMAGE, VIDEO, WEBCAM]
 # Webcam
 WEBCAM_ID = 0
 
@@ -31,10 +34,12 @@ VIDEO_1_PATH = VIDEO_DIR / 'weapon1_1.mp4'
 VIDEO_2_PATH = VIDEO_DIR / 'weapon2_2.mp4'
 VIDEO_3_PATH = VIDEO_DIR / 'balabanov.webm'
 VIDEO_4_PATH = VIDEO_DIR / 'gestures_test.mkv'
+VIDEO_5_PATH = VIDEO_DIR / 'school_shooting.mp4'
 VIDEOS_DICT = {
     'weapon1_1': VIDEO_1_PATH,
     'weapon2_2': VIDEO_2_PATH,
     'balabanov': VIDEO_3_PATH,
+    'Американская школа': VIDEO_5_PATH,
     'Жесты': VIDEO_4_PATH,
 }
 

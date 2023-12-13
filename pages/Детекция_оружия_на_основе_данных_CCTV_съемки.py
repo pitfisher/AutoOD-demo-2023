@@ -28,7 +28,7 @@ def weapon_demo():
         st.error(ex)
 
     st.sidebar.header("Настройки")
-    source_radio = st.sidebar.radio("Выберите источник: ", settings.SOURCES_LIST)
+    source_radio = st.sidebar.radio("Выберите источник: ", settings.SOURCES_LIST_WEAPONS)
     # weapons_helper.play_stored_video(confidence, model)
     if source_radio == settings.WEBCAM:
         weapons_helper.play_webcam(model)
