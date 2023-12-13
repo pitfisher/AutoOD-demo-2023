@@ -17,9 +17,6 @@ def gestures_demo():
     st.title("Распознавание жестов")
     st.sidebar.header("Настройки")
 
-    source_type = st.sidebar.radio(
-    "Тип источника", ['Файл', 'Видео'])
-
     path_to_json_config = 'yolo_config.json'
     config_loader = yolo_helper.ConfigLoader(path_to_json_config)
     config = config_loader.get_config()
@@ -34,7 +31,10 @@ def gestures_demo():
         st.error(f"Unable to load model. Check the specified path: {config['gestures_detection_model_path_v8']}")
         st.error(ex)
 
-    if source_type == 'Файл':
+    st.sidebar.header("Настройки")
+    source_radio = st.sidebar.radio("Выберите источник: ", settings.SOURCES_LIST_GESTURES)
+
+    if source_radio == settings.IMAGE:
         image_file = st.file_uploader("Upload Your Image", type=['jpg', 'png', 'jpeg'])
 
         if not image_file:
@@ -55,7 +55,7 @@ def gestures_demo():
         col2.image(original_image_np, caption = "Detection results")
         # st.image(cutout_images, clamp=True)
 
-    elif source_type == 'Видео':
+    elif source_radio == settings.VIDEO:
         if st.sidebar.button('Начать распознавание'):
             try:
                 vid_cap = cv2.VideoCapture(str(settings.VIDEOS_DICT.get("Жесты")))
@@ -80,8 +80,37 @@ def gestures_demo():
                         break
             except Exception as e:
                 st.sidebar.error("Error loading video: " + str(e))
+    elif source_radio == settings.WEBCAM:
+        if st.sidebar.button('Начать распознавание'):
+            try:
+                vid_cap = cv2.VideoCapture(settings.WEBCAM_ID)
+                vid_cap.set(cv2.CAP_PROP_FRAME_WIDTH, 720)
+                # vid_cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+                vid_cap.set(cv2.CAP_PROP_FPS, 30)
+                st_frame = st.empty()
+                while vid_cap.isOpened():
+                    success, image = vid_cap.read()
+                    original_image = image.copy()
+                    if success:
+                        yolo_v8_class_obj.detect_objects(frame=image,
+                                                                model=model,
+                                                                current_model_conf=confidence,
+                                                                image_size=720,
+                                                                image_displayer=yolo_helper.ImageDisplayer(),
+                                                                labels_translator=translator)
+                        with st_frame:
+                            st.text("Результаты распознавания")
+                            col1, col2 = st.columns(2)
+                            col1.image(original_image, caption = "Исходное изображение", channels="BGR", use_column_width=True)
+                            col2.image(image, caption = "Результаты распознавания", channels="BGR", use_column_width=True)
+                    else:
+                        vid_cap.release()
+                        break
+            except Exception as e:
+                st.sidebar.error("Error loading video: " + str(e))
     else:
         st.error("Please select a valid source type!")
+
 
 gestures_demo()
 
