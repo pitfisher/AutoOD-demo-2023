@@ -48,7 +48,7 @@ WEAPONS_DETECTION_MODEL = ROOT / "weights/best_coco_bbox_mAP_epoch_250.pth"
 WEAPONS_DETECTION_MODEL_CONFIG = ROOT / 'weights/rtmdet_l_8xb32-300e_coco_custom.py'
 
 # path to FasterRCNN model
-DRONE_BIG_MODEL = ROOT / "weights/drone_big_model.ckpt"
+DRONE_BIG_MODEL = ROOT / "weights/retina_1014.pth" #"weights/retina_1014.pth" "weights/drone_big_model.ckpt"
 # path to SSD MobileNetv3 model
 DRONE_SMALL_MODEL = ROOT / "weights/drone_small_model.ckpt"
 
