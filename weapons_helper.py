@@ -17,7 +17,7 @@ def load_model(config_file, checkpoint_file):
     return DetInferencer(str(config_file), str(checkpoint_file), device=DEVICE)
 
 
-def _display_detected_frames(model, st_frame, image):
+def _display_detected_frames(model, st_frame, image, out):
     image = cv2.resize(image, (720, int(720 * (9 / 16))))
 
     result = model(image, return_vis=True)
@@ -28,12 +28,12 @@ def _display_detected_frames(model, st_frame, image):
         visualized_image_array = np.array(image)
 
     visualized_image =  PIL.Image.fromarray(cv2.cvtColor(visualized_image_array, cv2.COLOR_BGR2RGB))
-    
     with st_frame:
         st.text("Результаты распознавания")
         col1, col2 = st.columns(2)
         col1.image(image, caption = "Исходное изображение", channels="BGR", use_column_width=True)
         col2.image(visualized_image, caption = "Результаты детекции", channels="BGR", use_column_width=True)
+    return visualized_image_array
     # st.image(cutout_images, clamp=True)
     # st_frame.image(visualized_image, caption='Detected Video', channels="BGR", use_column_width=True)
 
@@ -49,19 +49,34 @@ def play_stored_video(model):
         try:
             vid_cap = cv2.VideoCapture(
                 str(settings.VIDEOS_DICT.get(source_vid)))
+            # grab some parameters of video to use them for writing a new, processed video
+            width = int(vid_cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+            height = int(vid_cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+            frame_fps = vid_cap.get(cv2.CAP_PROP_FPS)  ##<< No need for an int
+
+            # specify a writer to write a processed video to a disk frame by frame
+            fourcc_mp4 = cv2.VideoWriter_fourcc(*'mp4v')
+            out_mp4 = cv2.VideoWriter('./weapons_output.mp4', fourcc_mp4, frame_fps, (width, height),isColor = False)
+            print("creating a video")
             st_frame = st.empty()
             while vid_cap.isOpened():
                 success, image = vid_cap.read()
                 if success:
-                    _display_detected_frames(model,
+                    visualized_image_array = _display_detected_frames(model,
                                              st_frame,
-                                             image
+                                             image,
+                                             out_mp4,
                                              )
+                    print(visualized_image_array.size)
+                    out_mp4.write(image)
                 else:
                     vid_cap.release()
                     break
         except Exception as e:
             st.sidebar.error("Ошибка загрузки видео: " + str(e))
+        out_mp4.release()
+        print("video was saved")
+        vid_cap.release()
 
 def play_webcam(model):
     source_webcam = settings.WEBCAM_ID
@@ -74,7 +89,7 @@ def play_webcam(model):
                 if success:
                     _display_detected_frames(model,
                                              st_frame,
-                                             image,
+                                             image, 
                                              )
                 else:
                     vid_cap.release()
